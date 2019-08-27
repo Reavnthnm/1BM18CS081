@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#define max_size 3
+
+void display(int *,int *);
+void enqueue(int *,int *,int *);
+void dequeue(int *,int *);
+int empty(int);
+int full(int);
+int topp(int *,int *);
+
+void dequeue(int q[],int *front)
+{
+	int i;
+	if(empty(*front))
+		printf("\nthe queue is empty");
+	else{
+		printf("\nremoved item: %d",q[0]);
+		for(i=0;i<=*front;i++)
+			q[i]=q[i+1];
+	}
+	
+	(*front)--;
+}
+
+void enqueue(int q[],int *front,int *item)
+{
+		q[++*front]=*item;
+}
+
+
+int empty(int front)
+{
+	if(front==-1)
+		return 1;
+	else
+		return 0;
+}
+
+void display(int q[],int *front)
+{
+	if(empty(*front))
+		printf("\nthe queue is empty");
+	else{
+		int i;
+		for(i=0;i<=*front;i++)
+			printf("\n%d",q[i]);
+	}
+}
+
+int main()
+{
+	int front=-1,q[max_size],item,n,p;
+	while(1)
+	{
+		printf("\nchoose an operation: ");
+		printf("\n1.push\n2.pop\n3.display\n4.exit ");
+		scanf("%d",&n);
+		switch(n)
+		{
+			case 1:if(front==max_size-1){
+					printf("\nthe queue is full");
+					break;
+					}
+				else{
+					printf("\nenter the item :");
+					scanf("%d",&item);
+					enqueue(q,&front,&item);
+					break;
+				    }
+			case 2:dequeue(q,&front);
+				break;
+			case 3: display(q,&front);
+				break;
+			case 4:exit(0);
+			default: printf("\n invalid input");
+		}
+	}
+return 0;
+}
