@@ -8,7 +8,6 @@ void enqueue(int *,int *,int *);
 void dequeue(int *,int *);
 int empty(int);
 int full(int);
-int topp(int *,int *);
 
 void dequeue(int q[],int *front)
 {
@@ -51,7 +50,7 @@ void display(int q[],int *front)
 
 int main()
 {
-	int front=-1,q[max_size],item,n,p;
+	int front=-1,q[max_size],item,n;
 	while(1)
 	{
 		printf("\nchoose an operation: ");
