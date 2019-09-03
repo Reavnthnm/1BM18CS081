@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define m 3
+
+void enqueue(int *,int *,int *,int *,int *);
+void dequeue(int *,int *,int *,int *);
+void display(int *,int *,int *,int *);
+
+void enqueue(int q[],int *front,int *rear,int *item,int *M)
+{
+	*M++;
+	if(*front==-1 && *rear==-1)
+	{
+		*front=0;
+		*rear=0;
+	}
+	else{
+		*rear=(*rear+1)%m;
+	}
+	q[*rear]=*item;
+	
+}
+
+void dequeue(int q[],int *front,int *rear,int *M)
+{
+	int l=0;
+	if(*front==*rear && *front==-1 && *rear==-1 && l<*M)
+		printf("\nQueue is empty");
+	else
+	{
+		*M--;
+		printf("\nremoved element: %d",q[*front]);
+		*front=(*front+1)%m;
+	}
+}
+
+void display(int q[],int *front,int *rear,int *M)
+{
+	int i,l=0;
+	if(*front==*rear && *front==-1 && *rear==-1)
+		printf("\nQueue is empty");
+	else if(*front<*rear)
+	{
+		for(i=*front;i<=*rear && l<*M;i=(i+1)%m)
+		{
+			printf("\n%d",q[i]);
+			l++;
+		}
+	}
+	else
+	{
+		for(i=*rear;i<=*front && l<*M;i=(i-1+m)%m)
+		{
+			printf("\n%d",q[m-i+1]);
+			l++;
+		}	
+	}
+}
+
+int main()
+{
+	int n,q[m],front=-1,rear=-1,item,M=0;
+	while(1)
+	{GMAIL.COM
+		printf("\nchoose an oparation: ");
+		printf("\n1.enqueue\n2.dequeue\n3.display\n4.exit");
+		scanf("%d",&n);
+		switch(n)
+		{
+			case 1:if(front==(rear+1)%m)
+				{
+					printf("\nQueue is full");
+					break;
+				}
+				else
+				{
+					printf("\nenter element: ");
+					scanf("%d",&item);
+					enqueue(q,&front,&rear,&item,&M);
+					break;
+				}
+			case 2:dequeue(q,&front,&rear,&M);
+				break;
+			case 3:display(q,&front,&rear,&M);
+				break;
+			case 4:exit(0);
+			default:printf("\ninvalid input");
+		}
+	}
+return 0;
+}
