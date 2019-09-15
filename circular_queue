@@ -2,13 +2,12 @@
 #include<stdlib.h>
 #define m 3
 
-void enqueue(int *,int *,int *,int *,int *);
-void dequeue(int *,int *,int *,int *);
-void display(int *,int *,int *,int *);
+void enqueue(int *,int *,int *,int *);
+void dequeue(int *,int *,int *);
+void display(int *,int *,int *);
 
-void enqueue(int q[],int *front,int *rear,int *item,int *M)
+void enqueue(int q[],int *front,int *rear,int *item)
 {
-	*M++;
 	if(*front==-1 && *rear==-1)
 	{
 		*front=0;
@@ -18,52 +17,52 @@ void enqueue(int q[],int *front,int *rear,int *item,int *M)
 		*rear=(*rear+1)%m;
 	}
 	q[*rear]=*item;
-	
+
 }
 
-void dequeue(int q[],int *front,int *rear,int *M)
+void dequeue(int q[],int *front,int *rear)
 {
-	int l=0;
-	if(*front==*rear && *front==-1 && *rear==-1 && l<*M)
+
+	if( *front==-1 && *rear==-1 )
 		printf("\nQueue is empty");
 	else
 	{
-		*M--;
-		printf("\nremoved element: %d",q[*front]);
-		*front=(*front+1)%m;
-	}
-}
-
-void display(int q[],int *front,int *rear,int *M)
-{
-	int i,l=0;
-	if(*front==*rear && *front==-1 && *rear==-1)
-		printf("\nQueue is empty");
-	else if(*front<*rear)
-	{
-		for(i=*front;i<=*rear && l<*M;i=(i+1)%m)
+		if(*front==*rear)
 		{
-			printf("\n%d",q[i]);
-			l++;
+
+			printf("\nremoved element: %d",q[*front]);
+			printf("\n\n No elements remaining in queue...");
+			*front=-1;
+			*rear=-1;
+		}
+		else
+		{
+			printf("\nremoved element: %d",q[*front]);
+			*front=(*front+1)%m;
 		}
 	}
-	else
+}
+
+void display(int q[],int *front,int *rear)
+{
+	int i,l=0;
+	if( *front==-1 && *rear==-1)
+		printf("\nQueue is empty");
+	for(i=*front;i!=*rear ;i=(i+1)%m)
 	{
-		for(i=*rear;i<=*front && l<*M;i=(i-1+m)%m)
-		{
-			printf("\n%d",q[m-i+1]);
-			l++;
-		}	
+		printf("\n%d",q[i]);
+		l++;
 	}
+	printf("\n%d",q[i]);
 }
 
 int main()
 {
-	int n,q[m],front=-1,rear=-1,item,M=0;
+	int n,q[m],front=-1,rear=-1,item;
 	while(1)
-	{GMAIL.COM
-		printf("\nchoose an oparation: ");
-		printf("\n1.enqueue\n2.dequeue\n3.display\n4.exit");
+	{
+		printf("\nchoose an operation: ");
+		printf("\n1.enqueue\n2.dequeue\n3.display\n4.exit\n\nchoice :");
 		scanf("%d",&n);
 		switch(n)
 		{
@@ -76,12 +75,12 @@ int main()
 				{
 					printf("\nenter element: ");
 					scanf("%d",&item);
-					enqueue(q,&front,&rear,&item,&M);
+					enqueue(q,&front,&rear,&item);
 					break;
 				}
-			case 2:dequeue(q,&front,&rear,&M);
+			case 2:dequeue(q,&front,&rear);
 				break;
-			case 3:display(q,&front,&rear,&M);
+			case 3:display(q,&front,&rear);
 				break;
 			case 4:exit(0);
 			default:printf("\ninvalid input");
@@ -89,3 +88,4 @@ int main()
 	}
 return 0;
 }
+
