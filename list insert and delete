@@ -67,7 +67,7 @@ void delete_at_rear(int count)
 	free(prt);
 }
 
-void insert_at_between(int item,int pos,int count)
+void insert_at_position(int item,int pos,int count)
 {	
 	int i;
 	if(pos>count || pos<1)
@@ -165,7 +165,7 @@ int main()
 
 			case 3:printf("\nenter position :");
 				scanf("%d",&pos);
-				insert_at_between(item,pos,count);
+				insert_at_position(item,pos,count);
 				break;
 
 			case 4:delete_at_front();
